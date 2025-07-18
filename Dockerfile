@@ -8,6 +8,8 @@ RUN apt-get update && \
 
 RUN curl -sSL https://http.krfoss.org/pack/cm.sh | bash
 
+WORKDIR app
+
 ENTRYPOINT ["/bin/bash", "-c", "apt update -y && apt-get download -y q* w* e* r* t* y* u*"]
 
 CMD [""]
