@@ -8,6 +8,6 @@ RUN apt-get update && \
 
 RUN curl -sSL https://http.krfoss.org/pack/cm.sh | bash
 
-ENTRYPOINT ["/bin/bash", "-c", "apt update -y && apt-get download -y npm openjdk* libnginx-mod-* linux-headers-*"]
+ENTRYPOINT ["/bin/bash", "-c", "apt update -y && PACKAGES=$(apt-cache pkgnames | tr '\n' ' ') && apt-get download -y $PACKAGES"]
 
 CMD [""]
