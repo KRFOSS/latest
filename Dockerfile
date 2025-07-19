@@ -2,7 +2,8 @@ FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
+RUN apt-get update -y && \
+    apt-get upgrade -y
     apt-get install -y ca-certificates curl && \
     apt-get clean
 
