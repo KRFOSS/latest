@@ -1,15 +1,17 @@
 FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV MIRROR_URL=http.krfoss.org
 
-WORKDIR test
+COPY init.sh .
+
+WORKDIR /test
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
-    apt-get install -y ca-certificates curl
+    apt-get install -y ca-certificates && \
+    apt-get clean
 
-RUN curl -sSL https://http.krfoss.org/pack/cm.sh | bash && apt-get clean
-
-ENTRYPOINT ["/bin/bash", "-c", "apt update -y && apt-get download -y a*"]
+ENTRYPOINT ["/bin/bash", "-c", "bash /init.sh && apt-get download -y a*"]
 
 CMD [""]
