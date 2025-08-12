@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM debian:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV MIRROR_URL=http.krfoss.org
