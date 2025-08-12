@@ -2,18 +2,20 @@
 
 CODENAME=$(lsb_release -cs 2>/dev/null || grep -oP 'VERSION_CODENAME=\K\w+' /etc/os-release)
 
-cat > /etc/apt/sources.list.d/ubuntu.sources << EOF
-Types: deb deb-src
-URIs: https://${MIRROR_URL}/ubuntu/
-Suites: $CODENAME $CODENAME-updates $CODENAME-backports
-Components: main restricted universe multiverse
-Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+cat > /etc/apt/sources.list << EOF
+deb https://http.krfoss.org/debian $CODENAME $COMPONENTS
+deb-src https://http.krfoss.org/debian $CODENAME $COMPONENTS
 
-Types: deb deb-src
-URIs: https://${MIRROR_URL}/ubuntu/
-Suites: $CODENAME-security
-Components: main restricted universe multiverse
-Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+deb https://http.krfoss.org/debian $CODENAME-updates $COMPONENTS
+deb-src https://http.krfoss.org/debian $CODENAME-updates $COMPONENTS
+
+# security updates
+deb https://http.krfoss.org/debian-security $CODENAME-security $COMPONENTS
+deb-src https://http.krfoss.org/debian-security $CODENAME-security $COMPONENTS
+
+# $CODENAME-backports, previously on backports.debian.org
+deb https://http.krfoss.org/debian $CODENAME-backports $COMPONENTS
+deb-src https://http.krfoss.org/debian $CODENAME-backports $COMPONENTS
 EOF
 
 apt update -y
