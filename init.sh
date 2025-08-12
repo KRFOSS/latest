@@ -1,6 +1,7 @@
 #!/bin/bash
 
 CODENAME=$(lsb_release -cs 2>/dev/null || grep -oP 'VERSION_CODENAME=\K\w+' /etc/os-release)
+COMPONENTS="main contrib non-free non-free-firmware"
 
 cat > /etc/apt/sources.list << EOF
 deb https://http.krfoss.org/debian $CODENAME $COMPONENTS
